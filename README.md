@@ -10,7 +10,7 @@
 
 | Campo | Valor |
 |---|---|
-| Turma | <!-- PREENCHER: ex. 12DTAT --> |
+| Turma | 2DTATBB |
 | Grupo | <!-- PREENCHER: ex. Grupo 07 --> |
 | Data de entrega | <!-- PREENCHER: DD/MM/AAAA --> |
 
@@ -18,11 +18,11 @@
 
 | Nome completo | RM | E-mail |
 |---|---|---|
-| <!-- PREENCHER --> | RM000000 | |
-| | | |
-| | | |
-| | | |
-| | | |
+| FAGNER DO ESPÍRITO SANTO SÁ | RM377821 | fagner.sa@bb.com.br |
+| MARIA APARECIDA BANDEIRA DA ROCHA| | cidarocha97@bb.com.br|
+| KATIA DA SILVA SARMENTO| |katia.sarmento@bb.com.br |
+| MARCIA REGINA CORREA DA SILVA | | marcia.rossa@bb.com.br|
+| MARILENE RODRIGUES QUINTINO| | marilene_quintino@yahoo.com.br |
 
 ---
 
@@ -32,7 +32,7 @@ Estes três links são **obrigatórios** e devem ser idênticos aos do PDF de su
 
 | Item | Link |
 |---|---|
-| Repositório | <!-- PREENCHER: URL pública do GitHub --> |
+| Repositório | https://github.com/fagnermacedo/tech-challenge-fase2 |
 | Vídeo executivo (≤ 5 min) | <!-- PREENCHER: YouTube não listado / Drive com acesso liberado --> |
 | Apresentação | <!-- PREENCHER: link do arquivo em `docs/` ou Drive --> |
 
@@ -43,27 +43,72 @@ Estes três links são **obrigatórios** e devem ser idênticos aos do PDF de su
 
 ## 3. O problema
 
-<!-- PREENCHER: contexto de negócio e a motivação para o uso de Machine Learning. -->
+A concessão de crédito é uma operação crítica, onde o equilíbrio entre
+aprovar bons clientes e evitar a inadiplência pode determinar a rentabilidade do negócio.
+O objetivo desse trabalho é sugerir uma forma de minimizar o risco de inadiplência de 
+novos solicitantes de cartão de crédito utilizando Machine Learning.
+Para isso, vamos utilizar datasets disponíveis no site kaggle, que possuem dados de clientes
+que irão aoxiliar na análise de crédito, pa
 
 ### Variável alvo
 
-<!-- PREENCHER: qual é a variável alvo, como foi definida e — se houve binarização —
-     qual limiar foi adotado e por quê. Justifique com base na distribuição das classes. -->
+A variável alvo TARGET não vem informada no dataset e será sugerida, encontrada, através da análises
+que serão feitas nas bases de dados.
+A base de dados "credit_record.csv" contém o perfil e o histórico dos clientes.
+O histórico fornece o "STATUS" mensal de pagamneto. 
+
+Oa Status são:
+ X -> Não possui empréstimo no mês.
+ C -> Empréstimo quitado no mês.
+ 0 -> Atraso entre 1 a 29 dias.
+ 1 -> Atraso entre 30 e 59 dias.
+ 2 -> Atraso entre 60 e 89 dias.
+ 3 -> Atraso entre 90 e 199 dias.
+ 4 -> Atraso entre 120 e 149 dias.
+ 5 -> Atraso superior a 150 dias ou dívida crítica
+
+*   **Definição:** Iremos adotar, para definirmos atraso, valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`) classificam o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
+*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos, demora no processammento das informações ou esquecimento. Mas o não registro do pagamneto, superior a 60 dias, sinaliza problema na capacidade de pagamento, quitação dos débitos do cartão. Essa será a definição, (alvo), adotada no trabalho
 
 ### Dataset
 
 | Campo | Valor |
 |---|---|
-| Fonte | <!-- PREENCHER: URL --> |
-| Linhas × colunas | <!-- PREENCHER --> |
-| Período / versão | <!-- PREENCHER --> |
-| Licença de uso | <!-- PREENCHER --> |
+| Fonte | [Kaggle - Credit Card Approval Prediction](https://www.kaggle.com/datasets/rikdifos/credit-card-approval-prediction/data) |
+| Linhas × colunas | Aplicações: 438.557 × 18 / Histórico de Crédito: 1.048.575 × 3 |
+| Período / versão | Versão 2 (Kaggle) |
+| Licença de uso | CC0: Public Domain |
 
-Descrição das variáveis:
+Descrição do histórico financeiro (`credit_record.csv`):
 
 | Variável | Tipo | Descrição |
 |---|---|---|
-| | | |
+| `ID` | Numérico | Número de identificação único do cliente (chave de cruzamento) |
+| `MONTHS_BALANCE` | Numérico | Mês do registro (0 é o mês atual, -1 é o mês anterior, -2 é dois meses atrás, etc.) |
+| `STATUS` | Categórico | Status do pagamento: `C` (pago), `X` (sem empréstimo no mês), `0` (atraso 1-29 dias), `1` (atraso 30-59 dias), `2` (atraso 60-89 dias), `3` (atraso 90-119 dias), `4` (atraso 120-149 dias), `5` (atraso > 150 dias ou dívida baixada). |
+
+Descrição das variáveis base (`application_record.csv`):
+
+| Variável | Tipo | Descrição |
+|---|---|---|
+| `ID` | Numérico | Número de identificação único do cliente |
+| `CODE_GENDER` | Categórico | Gênero do solicitante (M/F) |
+| `FLAG_OWN_CAR` | Categórico | Indica posse de veículo (Y/N) |
+| `FLAG_OWN_REALTY` | Categórico | Indica posse de propriedade/imóvel (Y/N) |
+| `CNT_CHILDREN` | Numérico | Quantidade de filhos |
+| `AMT_INCOME_TOTAL` | Numérico | Renda anual total |
+| `NAME_INCOME_TYPE` | Categórico | Categoria de renda (Trabalhador, Servidor Público, Pensionista, etc.) |
+| `NAME_EDUCATION_TYPE` | Categórico | Nível de escolaridade |
+| `NAME_FAMILY_STATUS` | Categórico | Estado civil |
+| `NAME_HOUSING_TYPE` | Categórico | Tipo de moradia (Própria, Alugada, etc.) |
+| `DAYS_BIRTH` | Numérico | Idade em dias (contagem regressiva a partir do dia atual, em valores negativos) |
+| `DAYS_EMPLOYED` | Numérico | Tempo de emprego atual em dias (valores negativos, ou positivos para desempregados/aposentados) |
+| `FLAG_MOBIL` | Numérico | Possui celular (1 = Sim, 0 = Não) |
+| `FLAG_WORK_PHONE` | Numérico | Possui telefone de trabalho (1 = Sim, 0 = Não) |
+| `FLAG_PHONE` | Numérico | Possui telefone fixo (1 = Sim, 0 = Não) |
+| `FLAG_EMAIL` | Numérico | Possui e-mail (1 = Sim, 0 = Não) |
+| `OCCUPATION_TYPE` | Categórico | Área de atuação profissional do cliente |
+| `CNT_FAM_MEMBERS` | Numérico | Tamanho do grupo familiar |
 
 ---
 
