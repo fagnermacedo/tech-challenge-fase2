@@ -57,7 +57,7 @@ que serão feitas nas bases de dados.
 A base de dados "credit_record.csv" contém o perfil e o histórico dos clientes.
 O histórico fornece o "STATUS" mensal de pagamneto. 
 
-Oa Status são:
+Os Status são:
  X -> Não possui empréstimo no mês.
  C -> Empréstimo quitado no mês.
  0 -> Atraso entre 1 a 29 dias.
