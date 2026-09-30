@@ -43,32 +43,25 @@ Estes três links são **obrigatórios** e devem ser idênticos aos do PDF de su
 
 ## 3. O problema
 
-A concessão de crédito é uma operação crítica, onde o equilíbrio entre
-aprovar bons clientes e evitar a inadiplência pode determinar a rentabilidade do negócio.
-O objetivo desse trabalho é sugerir uma forma de minimizar o risco de inadiplência de 
-novos solicitantes de cartão de crédito utilizando Machine Learning.
-Para isso, vamos utilizar datasets disponíveis no site kaggle, que possuem dados de clientes
-que irão aoxiliar na análise de crédito, pa
+A concessão de crédito é uma operação crítica, onde o equilíbrio entre aprovar bons clientes e evitar a inadimplência pode determinar a rentabilidade do negócio. O objetivo desse trabalho é sugerir uma forma de minimizar o risco de inadimplência de novos solicitantes de cartão de crédito utilizando Machine Learning. Para isso, vamos utilizar datasets disponíveis no site Kaggle, que possuem dados de clientes que irão auxiliar na análise de crédito.
 
 ### Variável alvo
 
-A variável alvo TARGET não vem informada no dataset e será sugerida, encontrada, através da análises
-que serão feitas nas bases de dados.
-A base de dados "credit_record.csv" contém o perfil e o histórico dos clientes.
-O histórico fornece o "STATUS" mensal de pagamneto. 
+A variável alvo TARGET não vem informada no dataset e será construída através das análises que serão feitas nas bases de dados. A base de dados `credit_record.csv` contém o histórico financeiro dos clientes e fornece o `STATUS` mensal de pagamento. 
 
 Os Status são:
- X -> Não possui empréstimo no mês.
- C -> Empréstimo quitado no mês.
- 0 -> Atraso entre 1 a 29 dias.
- 1 -> Atraso entre 30 e 59 dias.
- 2 -> Atraso entre 60 e 89 dias.
- 3 -> Atraso entre 90 e 199 dias.
- 4 -> Atraso entre 120 e 149 dias.
- 5 -> Atraso superior a 150 dias ou dívida crítica
 
-*   **Definição:** Iremos adotar, para definirmos atraso, valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`) classificam o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
-*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos, demora no processammento das informações ou esquecimento. Mas o não registro do pagamneto, superior a 60 dias, sinaliza problema na capacidade de pagamento, quitação dos débitos do cartão. Essa será a definição, (alvo), adotada no trabalho
+* `X` -> Não possui empréstimo no mês.
+* `C` -> Empréstimo quitado no mês.
+* `0` -> Atraso entre 1 a 29 dias.
+* `1` -> Atraso entre 30 e 59 dias.
+* `2` -> Atraso entre 60 e 89 dias.
+* `3` -> Atraso entre 90 e 119 dias.
+* `4` -> Atraso entre 120 e 149 dias.
+* `5` -> Atraso superior a 150 dias ou dívida crítica.
+
+*   **Definição:** Iremos adotar, para definirmos atraso, valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`) classificando o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
+*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos, como demora no processamento das informações ou esquecimento. Mas o não registro do pagamento, superior a 60 dias, sinaliza problema real na capacidade de quitação dos débitos do cartão. Essa será a definição de alvo adotada no trabalho.
 
 ### Dataset
 
