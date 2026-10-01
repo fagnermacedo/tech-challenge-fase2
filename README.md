@@ -19,10 +19,10 @@
 | Nome completo | RM | E-mail |
 |---|---|---|
 | FAGNER DO ESPÍRITO SANTO SÁ | RM377821 | fagner.sa@bb.com.br |
-| MARIA APARECIDA BANDEIRA DA ROCHA| | cidarocha97@bb.com.br|
-| KATIA DA SILVA SARMENTO| |katia.sarmento@bb.com.br |
-| MARCIA REGINA CORREA DA SILVA | | marcia.rossa@bb.com.br|
-| MARILENE RODRIGUES QUINTINO| | marilene_quintino@yahoo.com.br |
+| MARIA APARECIDA BANDEIRA DA ROCHA| RM377784 | cidarocha97@bb.com.br|
+| KATIA DA SILVA SARMENTO| RM377748 |katia.sarmento@bb.com.br |
+| MARCIA REGINA CORREA DA SILVA | RM37782 | marcia.rossa@bb.com.br|
+| MARILENE RODRIGUES QUINTINO| RM378099 | marilene_quintino@yahoo.com.br |
 
 ---
 
@@ -47,7 +47,9 @@ A concessão de crédito é uma operação crítica, onde o equilíbrio entre ap
 
 ### Variável alvo
 
-A variável alvo TARGET não vem informada no dataset e será construída através das análises que serão feitas nas bases de dados. A base de dados `credit_record.csv` contém o histórico financeiro dos clientes e fornece o `STATUS` mensal de pagamento. 
+### Variável alvo
+
+A variável alvo TARGET não vem informada no dataset e será construída através das análises que serão feitas nas bases de dados. A base de dados `credit_record.csv` contém o histórico financeiro dos clientes e fornece o `STATUS` mensal de pagamento.
 
 Os Status são:
 
@@ -60,8 +62,8 @@ Os Status são:
 * `4` -> Atraso entre 120 e 149 dias.
 * `5` -> Atraso superior a 150 dias ou dívida crítica.
 
-*   **Definição:** Iremos adotar, para definirmos atraso, valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`) classificando o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
-*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos, como demora no processamento das informações ou esquecimento. Mas o não registro do pagamento, superior a 60 dias, sinaliza problema real na capacidade de quitação dos débitos do cartão. Essa será a definição de alvo adotada no trabalho.
+*   **Definição:** Iremos adotar como atraso valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`), classificando o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
+*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos operacionais, como demora no processamento ou esquecimento. No entanto, a escolha do limiar estrito de 60 dias está ancorada em critérios regulatórios do Banco Central do Brasil (Resolução CMN nº 2.682/1999). A partir do 61º dia de atraso, a operação é rebaixada para o nível de risco D, obrigando a instituição a elevar a Provisão para Créditos de Liquidação Duvidosa (PCLD) de 3% para 10%. Classificar o cliente como "Mau Pagador" a partir desta marca permite que o modelo atue preventivamente na proteção do capital e na manutenção da rentabilidade.
 
 ### Dataset
 
