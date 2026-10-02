@@ -1,9 +1,5 @@
 # Tech Challenge — Fase 2 | POSTECH Data Analytics
 
-> **INSTRUÇÕES:** este README é um template. Substitua **todos** os blocos marcados com
-> `<!-- PREENCHER -->` e apague as linhas de instrução antes de submeter.
-> O README vale **3 pontos** na Dimensão 1 da rúbrica.
-
 ---
 
 ## 1. Identificação
@@ -11,7 +7,7 @@
 | Campo | Valor |
 |---|---|
 | Turma | 2DTATBB |
-| Grupo | <!-- PREENCHER: ex. Grupo 07 --> |
+| Grupo |  |
 | Data de entrega | <!-- PREENCHER: DD/MM/AAAA --> |
 
 ### Integrantes
