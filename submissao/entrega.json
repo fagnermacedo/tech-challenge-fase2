@@ -1,13 +1,16 @@
 {
-  "turma": "12DTAT",
-  "grupo": "Grupo 00",
+  "turma": "2DTATBB",
+  "grupo": "Não se Aplica",
   "integrantes": [
-    { "nome": "Nome Completo do Integrante", "rm": "RM000000" },
-    { "nome": "Nome Completo do Integrante", "rm": "RM000000" }
+    { "nome": "FAGNER DO ESPÍRITO SANTO SÁ", "rm": "RM377821" },
+    { "nome": "MARIA APARECIDA BANDEIRA DA ROCHA", "rm": "RM377784" },
+    { "nome": "KATIA DA SILVA SARMENTO", "rm": "RM377748" },
+    { "nome": "MARCIA REGINA CORREA DA SILVA", "rm": "RM37782" },
+    { "nome": "MARILENE RODRIGUES QUINTINO", "rm": "RM378099" }
   ],
   "links": {
-    "repositorio": "https://github.com/usuario/nome-do-repositorio",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "apresentacao": "https://github.com/usuario/nome-do-repositorio/blob/main/docs/apresentacao_executiva.pdf"
+    "repositorio": "https://github.com/fagnermacedo/tech-challenge-fase2",
+    "video": "",
+    "apresentacao": ""
   }
 }
