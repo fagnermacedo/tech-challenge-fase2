@@ -2,7 +2,7 @@
 
 O PDF de submissão contém **apenas três links**: repositório, vídeo e apresentação.
 Ele não é gerado à mão — preencha o JSON e rode o script, para que todos os grupos
-entreguem exatamente o mesmo formato.
+entreguem exatamente o mesmo formato. 
 
 ## Passo a passo
 
