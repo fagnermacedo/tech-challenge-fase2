@@ -17,7 +17,7 @@
 | FAGNER DO ESPÍRITO SANTO SÁ | RM377821 | fagner.sa@bb.com.br |
 | MARIA APARECIDA BANDEIRA DA ROCHA| RM377784 | cidarocha97@bb.com.br|
 | KATIA DA SILVA SARMENTO| RM377748 |katia.sarmento@bb.com.br |
-| MARCIA REGINA CORREA DA SILVA | RM37782 | marcia.rossa@bb.com.br|
+| MARCIA REGINA CORREA DA SILVA | RM377782 | marcia.rossa@bb.com.br|
 | MARILENE RODRIGUES QUINTINO| RM378099 | marilene_quintino@yahoo.com.br |
 
 ---
