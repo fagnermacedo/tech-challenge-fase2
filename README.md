@@ -7,8 +7,8 @@
 | Campo | Valor |
 |---|---|
 | Turma | 2DTATBB |
-| Grupo |  |
-| Data de entrega | <!-- PREENCHER: DD/MM/AAAA --> |
+| Grupo | Não se Aplica |
+| Data de entrega | A confirmar antes da submissão |
 
 ### Integrantes
 
@@ -29,23 +29,28 @@ Estes três links são **obrigatórios** e devem ser idênticos aos do PDF de su
 | Item | Link |
 |---|---|
 | Repositório | https://github.com/fagnermacedo/tech-challenge-fase2 |
-| Vídeo executivo (≤ 5 min) | <!-- PREENCHER: YouTube não listado / Drive com acesso liberado --> |
-| Apresentação | <!-- PREENCHER: link do arquivo em `docs/` ou Drive --> |
+| Vídeo executivo (≤ 5 min) | Pendente de publicação |
+| Apresentação | Pendente de publicação em `docs/apresentacao_executiva.pdf` |
 
-> ⚠️ Repositório privado ou inacessível **zera** toda a Dimensão 1 da rúbrica.
-> Confira o acesso em uma janela anônima antes de enviar.
+> ⚠️ Um repositório privado ou inacessível pode comprometer a avaliação da
+> Dimensão 1. Antes de enviarmos a entrega, precisamos confirmar o acesso em
+> uma janela anônima.
 
 ---
 
 ## 3. O problema
 
-A concessão de crédito é uma operação crítica, onde o equilíbrio entre aprovar bons clientes e evitar a inadimplência pode determinar a rentabilidade do negócio. O objetivo desse trabalho é sugerir uma forma de minimizar o risco de inadimplência de novos solicitantes de cartão de crédito utilizando Machine Learning. Para isso, vamos utilizar datasets disponíveis no site Kaggle, que possuem dados de clientes que irão auxiliar na análise de crédito.
+Neste projeto, analisamos o risco de inadimplência na concessão de crédito. Nosso
+objetivo é avaliar como técnicas de Machine Learning podem apoiar a identificação
+de clientes com maior risco, utilizando os dados cadastrais e o histórico de
+pagamentos disponibilizados no Kaggle.
 
 ### Variável alvo
 
-### Variável alvo
-
-A variável alvo TARGET não vem informada no dataset e será construída através das análises que serão feitas nas bases de dados. A base de dados `credit_record.csv` contém o histórico financeiro dos clientes e fornece o `STATUS` mensal de pagamento.
+A variável `TARGET` não vem informada nos arquivos originais; nós a construímos a
+partir do histórico mensal de pagamentos (`credit_record.csv`). Para cada cliente,
+definimos `TARGET = 1` se encontramos pelo menos um registro com `STATUS` igual
+a `2`, `3`, `4` ou `5`; caso contrário, definimos `TARGET = 0`.
 
 Os Status são:
 
@@ -58,8 +63,9 @@ Os Status são:
 * `4` -> Atraso entre 120 e 149 dias.
 * `5` -> Atraso superior a 150 dias ou dívida crítica.
 
-*   **Definição:** Iremos adotar como atraso valores iguais ou superiores a 60 dias (status `2`, `3`, `4` e `5`), classificando o cliente como "Mau Pagador" (1). Clientes com pagamentos em dia ou com atrasos menores que 60 dias (status `X`, `C`, `0`, `1`) serão classificados como "Bons Pagadores" (0).
-*   **Justificativa:** Atrasos curtos podem ocorrer por diversos motivos operacionais, como demora no processamento ou esquecimento. No entanto, a escolha do limiar estrito de 60 dias está ancorada em critérios regulatórios do Banco Central do Brasil (Resolução CMN nº 2.682/1999). A partir do 61º dia de atraso, a operação é rebaixada para o nível de risco D, obrigando a instituição a elevar a Provisão para Créditos de Liquidação Duvidosa (PCLD) de 3% para 10%. Classificar o cliente como "Mau Pagador" a partir desta marca permite que o modelo atue preventivamente na proteção do capital e na manutenção da rentabilidade.
+* **Definição:** Classificamos os status `2` a `5` como inadimplência (`TARGET = 1`), pois representam atrasos a partir de 60 dias segundo as categorias da base. Classificamos os status `X`, `C`, `0` e `1` como `TARGET = 0`.
+* **Contexto e limitação:** Escolhemos esse limiar como regra de negócio acadêmica, considerando a gravidade dos atrasos. Usamos a Resolução CMN nº 2.682/1999 apenas como referência histórica — ela foi substituída, a partir de 1º de janeiro de 2025, pela Resolução CMN nº 4.966/2021. Também observamos que a faixa `STATUS = 2` começa em 60 dias, enquanto a classificação histórica de risco D citada na Resolução 2.682 começava em 61 dias. Portanto, não reproduzimos exatamente o critério regulatório nem afirmamos conformidade regulatória.
+* **Horizonte do rótulo:** Construímos o target com base no pior status observado em qualquer mês disponível. Assim, identificamos inadimplência grave em algum momento do histórico, mas não estimamos diretamente a probabilidade de default nos próximos 6 ou 12 meses. Como o período observado varia entre clientes, reconhecemos a possibilidade de viés de exposição.
 
 ### Dataset
 
@@ -106,20 +112,23 @@ Descrição das variáveis base (`application_record.csv`):
 ## 4. Como reproduzir
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
-cd <NOME_DO_REPOSITORIO>
+git clone https://github.com/fagnermacedo/tech-challenge-fase2.git
+cd tech-challenge-fase2
 
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+# Linux / macOS:
+source .venv/bin/activate
+# Windows PowerShell:
+.\.venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
 jupyter notebook
 ```
 
-Baixe o dataset e coloque o arquivo bruto em `data/raw/` (os dados **não** são versionados —
-veja `data/README.md`).
+Baixamos os arquivos originais do dataset e os colocamos em `data/raw/` (os dados
+**não** são versionados; consultamos `data/README.md` para obter as instruções).
 
-Depois execute os notebooks nesta ordem:
+Em seguida, executamos os notebooks nesta ordem:
 
 | # | Notebook | O que faz |
 |---|---|---|
@@ -128,9 +137,11 @@ Depois execute os notebooks nesta ordem:
 | 3 | `notebooks/03_modelagem.ipynb` | Treino e comparação dos modelos |
 | 4 | `notebooks/04_avaliacao.ipynb` | Métricas, importância de variáveis e conclusões |
 
-**Semente fixa:** `RANDOM_STATE = 42`, declarada na primeira célula de cada notebook.
-Rodar os notebooks na ordem acima, a partir de um ambiente limpo, deve reproduzir
-exatamente os números da seção 5.
+**Semente fixa:** usamos `random_state = 42` nos pontos aleatórios documentados
+dos notebooks de modelagem. Ao executarmos as etapas em ordem, com os arquivos
+brutos e as dependências instalados, geramos os artefatos intermediários
+necessários à avaliação. Os resultados podem variar se utilizarmos versões
+diferentes das bibliotecas.
 
 ---
 
@@ -138,29 +149,63 @@ exatamente os números da seção 5.
 
 | Modelo | Acurácia | Precisão | Recall | F1 | AUC-ROC |
 |---|---|---|---|---|---|
-| <!-- PREENCHER --> | | | | | |
-| | | | | | |
+| Regressão Logística (baseline) | 0,61 | 0,02 | 0,46 | 0,04 | 0,5608 |
+| Random Forest | 0,9606 | 0,1564 | 0,3027 | 0,2063 | 0,6681 |
 
-**Modelo escolhido:** <!-- PREENCHER --> — <!-- PREENCHER: por quê. -->
+Na tabela, apresentamos precisão, recall e F1 da classe `1` (inadimplência),
+arredondados conforme a saída salva no Notebook 03. Também calculamos PR-AUC
+de **0,1045** para o Random Forest no conjunto de teste. Como não calculamos essa
+métrica para a Regressão Logística na saída correspondente, não a comparamos aqui.
 
-**Métricas priorizadas:** <!-- PREENCHER: justifique a escolha considerando o
-     desbalanceamento de classes e o custo de cada tipo de erro no contexto do negócio. -->
+**Modelo que selecionamos para a avaliação final:** Random Forest. No conjunto de
+teste salvo, observamos F1 da classe 1 e ROC-AUC superiores aos da Regressão
+Logística. Também identificamos um trade-off: a Regressão Logística apresentou
+recall maior, mas precisão muito baixa; o Random Forest reduziu os falsos positivos,
+mas também apresentou recall menor.
+
+**Métricas que priorizamos:** recall e precisão da classe `1`, F1 e ROC-AUC, além
+da matriz de confusão. Usamos o recall para medir a parcela de inadimplentes
+identificados e a precisão para verificar quantos dos clientes sinalizados
+realmente pertencem à classe inadimplente. Como observamos forte desbalanceamento
+(1,69% de inadimplência no conjunto usado), não consideramos a acurácia isolada
+suficiente. Também reconhecemos que o limiar de classificação afeta esse equilíbrio
+e precisa ser avaliado antes de qualquer uso operacional.
 
 ---
 
 ## 6. Principais conclusões
 
-<!-- PREENCHER: 3 a 5 conclusões em linguagem de negócio.
-     Inclua quais variáveis mais influenciam o resultado e o que isso significa
-     na prática para quem vai usar o modelo. -->
-
-1.
-2.
-3.
+1. Cruzamos os dados cadastrais e o histórico de crédito e obtivemos 36.457
+   clientes para a modelagem; classificamos 1,69% na classe de inadimplência.
+   Por isso, avaliamos métricas além da acurácia.
+2. No teste, o Random Forest identificou 56 dos 185 inadimplentes (recall de
+   30,27%) e sinalizou incorretamente 302 clientes da classe 0. Concluímos que
+   o modelo deixou de identificar a maioria dos inadimplentes e não está pronto
+   para ser usado como política automatizada de concessão.
+3. Observamos que variáveis como idade, tempo de emprego e renda estão entre as
+   mais importantes para o Random Forest. Interpretamos essa importância como
+   contribuição relativa para as divisões do modelo, não como causalidade ou
+   explicação individual das decisões.
+4. Concluímos que os resultados podem apoiar uma análise exploratória de risco.
+   Antes de qualquer decisão operacional, precisamos validar o target em uma
+   janela temporal futura, avaliar limiares segundo os custos do negócio e
+   realizar validações adicionais.
 
 ### Limitações e próximos passos
 
-<!-- PREENCHER -->
+* Construímos um target retrospectivo, sem horizonte futuro fixo. Como próximo
+  passo, precisamos definir uma janela de observação e outra de desempenho futuro.
+* A classe de inadimplência representa apenas 1,69% da base de modelagem.
+  Precisamos acompanhar o desempenho nessa classe e o equilíbrio entre falsos
+  positivos e falsos negativos.
+* Não comparamos o limiar padrão de classificação com limiares alternativos.
+  Precisamos fazer essa análise usando validação, sem ajustar o limiar com base
+  no conjunto de teste final.
+* Reconhecemos que as importâncias do Random Forest não demonstram causalidade
+  nem explicam individualmente as previsões. Em etapas futuras, podemos explorar
+  métodos de explicabilidade e análises de viés.
+* Antes da submissão, precisamos revisar as interpretações e saídas salvas dos
+  notebooks para confirmar que os textos correspondem aos resultados atuais.
 
 ---
 
@@ -173,11 +218,14 @@ exatamente os números da seção 5.
 └── docs/          apresentação executiva
 ```
 
-Detalhes e convenções em [`ESTRUTURA.md`](ESTRUTURA.md).
-Antes de enviar, percorra o [`CHECKLIST.md`](CHECKLIST.md).
+Documentamos os detalhes e as convenções em [`ESTRUTURA.md`](ESTRUTURA.md).
+Antes de enviarmos o projeto, consultamos o [`CHECKLIST.md`](CHECKLIST.md).
 
 ---
 
 ## 8. Tecnologias
 
-<!-- PREENCHER: Python 3.11, pandas, scikit-learn, ... -->
+Utilizamos Python 3.12.8 (versão registrada nos metadados dos notebooks) e as
+bibliotecas listadas em [`requirements.txt`](requirements.txt): pandas 2.2.3,
+NumPy 2.1.3, scikit-learn 1.5.2, Matplotlib 3.9.2, Seaborn 0.13.2,
+Jupyter 1.1.1 e joblib 1.4.2.
