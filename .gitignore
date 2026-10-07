@@ -18,6 +18,11 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
+# Análises locais não destinadas à publicação
+/ANALISE_PERFIL_CLIENTES.md
+/FEATURE_IMPORTANCE_VS_PERFIL.md
+/RESUMO_VARIAVEIS_DISPONIVEIS.md
+
 # Ambiente e segredos
 .env
 .env.*
