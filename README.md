@@ -29,8 +29,8 @@ Estes três links são **obrigatórios** e devem ser idênticos aos do PDF de su
 | Item | Link |
 |---|---|
 | Repositório | https://github.com/fagnermacedo/tech-challenge-fase2 |
-| Vídeo executivo (≤ 5 min) | Pendente de publicação |
-| Apresentação | Pendente de publicação em `docs/apresentacao_executiva.pdf` |
+| Vídeo executivo (≤ 5 min) | https://github.com/fagnermacedo/tech-challenge-fase2/blob/main/docs/Apresentacao_Tech_Challenge_09_10_2026.mp4 |
+| Apresentação | Pendente de publicação em https://github.com/fagnermacedo/tech-challenge-fase2/blob/main/docs/apresentacao_executiva.pdf` |
 
 > ⚠️ Um repositório privado ou inacessível pode comprometer a avaliação da
 > Dimensão 1. Antes de enviarmos a entrega, precisamos confirmar o acesso em

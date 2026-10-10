@@ -39,14 +39,14 @@ permanecem pendentes ou dependem de confirmação externa antes da submissão.
 
 ## Apresentação e vídeo (10 pts)
 
-- [ ] Apresentação em `docs/apresentacao_executiva.pdf`
-- [ ] Storytelling conecta os insights — não é uma sequência de gráficos
-- [ ] Vídeo com **≤ 5 minutos**
-- [ ] Ao menos um integrante aparece ou narra
-- [ ] Linguagem executiva, sem jargão técnico
+- [x] Apresentação em `docs/apresentacao_executiva.pdf`
+- [x] Storytelling conecta os insights — não é uma sequência de gráficos
+- [x] Vídeo com **≤ 5 minutos**
+- [x] Ao menos um integrante aparece ou narra
+- [x] Linguagem executiva, sem jargão técnico
 
 ## Submissão
 
-- [ ] PDF com os três links gerado
-- [ ] Links do PDF idênticos aos do README
-- [ ] PDF enviado na plataforma
+- [x] PDF com os três links gerado
+- [x] Links do PDF idênticos aos do README
+- [x] PDF enviado na plataforma
